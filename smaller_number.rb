@@ -1,13 +1,32 @@
 def next_smaller(n)
   n_array = n.to_s.chars
+  return -1 if n_array.length == 1
+
+  
   if n_array[-1] < n_array[-2]
     #swap the last two digits
     n_array[-1],n_array[-2] = n_array[-2],n_array[-1]
     return n_array.join.to_i
+
+  elsif n_array[-2] < n_array[-3]
+    #permutate the last three digits
+    #change this so that it adds all the first characters
+    first_chars = ""
+    last_three = n_array.last(3)
+    last_three_joined = last_three.join
+   
+    last_three_pas = last_three.permutation.map(&:join).sort
+    
+    last_three_final = last_three_pas[last_three_pas.index(last_three_joined)-1]
+
+    result = (first_chars + last_three_final).to_i
+    puts result
   end
 end
 
-puts next_smaller(21)
+
+puts next_smaller(312)
+puts next_smaller(321)
 =begin
   d.map!{|x| x.to_i}
   e = d[d.index(n)-1]
